@@ -1,0 +1,34 @@
+html
+  head
+    title ToDo Application
+    meta(name='description', content='Home page')
+    link#favicon(rel='icon', href='https://hyperdev.com/favicon-app.ico', type='image/x-icon')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/style.css')
+  body
+    h1.border.center Plan your goals!
+    h2.center Why not start now?
+
+    div.login
+      form(action="/login" method="POST")
+        div.username
+          label.userLabel Username:  
+          input(type="text" name="username")
+        div.password
+          label.passLabel Password:    
+          input(type="password" name="password")
+        div.login-button
+          input(type='submit', value='Log In')
+
+    div.register
+      form(action="/register" method="POST")
+        div.username
+          label.userLabel Username:  
+          input(type="text" name="username")
+        div.password
+          label.passLabel Password:    
+          input(type="password" name="password")
+        div.login-button
+          input(type='submit', value='Register')
