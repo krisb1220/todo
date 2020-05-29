@@ -2,26 +2,34 @@ const passport = require('passport');
 const LocalStrategy = require("passport-local").Strategy;
 const GitHubStrategy = require("passport-github").Strategy;
 const ObjectID = require("mongodb").ObjectID;
+const bcrypt = require("bcrypt");
 
 module.exports = function(app, db) {
-  passport.serializeUser((id, done)=>{
-    done(null, id);
-  })
   
-  passport.deserializeUser((user, done)=>{
-    db.collection('users').findOne({_id: new ObjectID(id)}, (err, doc)=>{
-      if(err) done(err, null);
-      else done(null, doc);
-    })
+  passport.serializeUser((user, done) => {        //serialize user (user, done), return done(noError, userID)
+    done(null, user._id);
+  });
+
+  passport.deserializeUser((id, done) => {      //desiralizeUser (id, done) return done(null, userDoc)           
+    db.collection("users").findOne({ _id: new ObjectID(id) }, (err, doc) => { //call DB and find user by ObjectID(id)
+      done(null, doc); //return noError, user data
+    });
   });
 
 
-  passport.use(new LocalStrategy((username, password, done)=>{
-    if(err) {
-      console.error(err);
-      done(err, false);
-    }
-    if(!user) done(null, false);
-    if(!password) done(null, false)
-  }));
+  passport.use(new LocalStrategy((user, password, done)=>{
+        db.collection("users").findOne({username:user}, (err, doc)=>{
+
+          if(!user) return done(null, false);
+          if(!password) return done(null, false)
+          else {
+            if (!bcrypt.compareSync(password, doc.password)) return done(null, false); //if password hashes not equal, return NO ERRORS and AUTH FALSE
+            else  { 
+              console.log("User authenticated");
+              return done(null, doc); //if all checks pass, return NO ERRORS and AUTH TRUE
+            }
+          }
+        });
+     }));
+
 }

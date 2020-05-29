@@ -34,7 +34,7 @@ module.exports = function(app, db){
   })
 
 
-  app.route("/login").post(passport.authenticate('local', {successRedirect:"/", failureRedirect: "/"}), (req, res)=>{
+  app.route("/login").post(passport.authenticate('local', {successRedirect:"/profile", failureRedirect: "/"}), (req, res)=>{
     console.log(req.isAuthenticated());
   });
 
@@ -42,12 +42,18 @@ module.exports = function(app, db){
     
     await db.collection('user').findOne({user:req.body.username}, (err, doc)=>{
       if(!doc) makeNewUser(db, req.body.username, req.body.password);
+      if(doc) console.log("User exists");
     });
 
     res.redirect("/");
 
   });
 
+
+  app.route("/profile").get((req, res)=>{
+    console.log(req.user)
+    res.render(process.cwd() + "/routes/pug/profile", {user:req.user.username});
+  });
   //end module.exports
 
 }
