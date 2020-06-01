@@ -2,11 +2,12 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const routes = require("./routes/routes")
-const auth = require("./auth/auth")
+const routes = require("./routes/routes");
+const auth = require("./auth/auth");
+const Schemas = ("./database/schemas/schemas");
 const mongooseOptions = {useUnifiedTopology:true, useNewUrlParser:true};
 const app = express();
 
