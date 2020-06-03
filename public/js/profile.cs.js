@@ -73,6 +73,8 @@ document.getElementById("submitTask").addEventListener("click", async (event)=>{
     tags: getTags()
   }
 
+  //
+
   updateUser(data, "newtask").then((res)=>{
        if(res.data.error == null && res.status == 200) {
          inputIDs.forEach((input)=>{
