@@ -1,9 +1,35 @@
-form > label
-{
-   float: left;
-   text-align: left;
-   width: 6em;
-   direction: ltr;
-   margin-right: 1em;
-   margin-top: 0.4em;
-}
+.tagColor {
+   height: 10px;
+   width: 10px;
+   display: inline-block;
+   background: red;
+   // highlight: none;
+ }
+ 
+ .tagInner {
+    display: flex;
+    padding: 0px;
+   cursor: pointer;
+    p {
+      margin: 0px;
+      font-size: 14pt;
+      margin-left: 10px;
+    }
+
+    span {
+       margin: auto 0px;
+    }
+
+    ::selection {
+       background: rgba(0,0,0,0)
+    }
+
+ }
+
+ .tagInner[data-istrue~="false"] > * {
+   opacity: 0.5;
+ }
+
+ .tagInner[data-istrue~="true"] > * {
+   opacity: 1;
+ }

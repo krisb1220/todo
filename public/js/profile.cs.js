@@ -6,20 +6,19 @@ let inputIDs = ["#title", "#description", "#dateTime"];
 })
 
 
-let doChecks = function() {
+let doTaskSubmitValidation = function() {
 
   result = true;
   inputIDs.forEach((input)=>{
     let currentInput = qry(input)
     if (currentInput.value == '') {
       result=false;
-      currentInput.style = "background:#f05"; 
+      currentInput.style = "background:rgba(255,0,0,0.2)"; 
       currentInput.addEventListener("click", ()=>{
         currentInput.style="background:#fff"
       })
     }
   })
-
   return result;
 }
 
@@ -29,12 +28,12 @@ let getTags = function() {
   let checked = [];
   let hasTags = false;
   let result;
-  for(a in qry("div.tags").children){
-      current = qry("div.tags").children[a]
-      console.log(current.checked)
-      if(current.checked == true) {
+  for(var i = 0; i <= document.querySelectorAll("#displayTags > .tagInner").length-1; i++){
+      current =  document.querySelectorAll("#displayTags > .tagInner")[i]
+      if(current.dataset.istrue == "true") {
+        console.log("true")
         hasTags = true;
-        checked.push(current.name);
+        checked.push(current.dataset.tagname);
       }
     };
   result = hasTags ? checked :  ["Task"];
@@ -43,12 +42,28 @@ let getTags = function() {
 }
 
 
+document.querySelectorAll(".tagInner").forEach((elm)=>{
+  elm.addEventListener("click", (event)=>{
+    console.log(event)
+    if(event.path[1].dataset.istrue == "false") event.path[1].dataset.istrue = "true"; 
+    else event.path[1].dataset.istrue = "false";
+  })
+})
+
+let updateUser = function(data, action) {
+  return axios({
+    method: 'post',
+    url: `/updateUser?action=${action}`,
+    data: data,
+    redirect: "manual"
+    })
+}
 
 document.getElementById("submitTask").addEventListener("click", async (event)=>{
 
   await event.preventDefault();
 
-  if(await doChecks()) {
+  if(await doTaskSubmitValidation()) {
 
   let data = {
     title: qry("#title").value,
@@ -57,23 +72,14 @@ document.getElementById("submitTask").addEventListener("click", async (event)=>{
     time: qry("#dateTime").value.split("T")[1],
     tags: getTags()
   }
-  
 
-
-  axios({
-    method: 'post',
-    url: '/addNewTask',
-    data: data,
-    redirect: "manual"
-    }).then((res)=>{
+  updateUser(data, "newtask").then((res)=>{
        if(res.data.error == null && res.status == 200) {
          inputIDs.forEach((input)=>{
           qry(input).value = null;
           qry("p.status").innerText = "Success!";
         })
       }
-      
-    }
-    );
+    });
   }
 })  

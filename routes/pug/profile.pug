@@ -10,7 +10,7 @@ html
   
   body
   h1.hello Hello #{user.first}!
-
+  
   form(name="new-task" id="new-task")
     p.status
     div.title
@@ -24,15 +24,24 @@ html
       input.titleInput(type="datetime-local" name="dateTime" id="dateTime")
     input(type="submit" id="submitTask")
     div.tags 
-      label.tagsInput Choose your tags
-      each val in tags
-        -let tag = val.name
-        label(class="tag") #{val.name}
-        input(name=tag data-tagname=tag id=tag type="checkbox" )  
+      label#addCustomTagsLabel
+      input#addCustomTagsName(type="text")
+      input#addCustomTagsColor(type="color")
+      div#displayTags
+        p#tagsInput Choose your tags
+        each val in tags
+          -let tag = val.name
+          -let tagId = `#${tag}`
+          -let tagColor = val.color
+          -let tagColorStyle = `background-color:${tagColor}`
+          //- label(class="tag" for=tagId)  #{tag}
+          div.tagInner(name=tag data-tagname=tag data-isTrue="false" id=tag type="checkbox" )
+            span.tagColor(style=tagColorStyle)
+            p #{tag}
     
           
-script(src="/js/global.js")
-script(src="/js/profile.js")
+script(src="/js/global.cs.js")
+script(src="/js/profile.cs.js")
 
 
 
