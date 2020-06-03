@@ -1,14 +1,17 @@
 let TagListInstance = require("./TagListInstance");
-
+let ObjectID = require("mongodb").ObjectID;
 
 module.exports.data = class ToDoInstance {
-  constructor(name, description, startDate, endDate, tags, isRecurring) {
-    this.name = name;
-    this.description = description; 
-    this. startDate = startDate;
-    this.endDate = endDate;
-    this.tags = {};
-    this.isRecurring = isRecurring;
+  constructor(obj) {
+    this.title = obj.title;
+    this.description = obj.description; 
+    this. startDate = obj.date;
+    this.time = obj.time;
+    this.tags = obj.tags;
+    this.isRecurring = false;
     this.deleted = false; 
+    this.created = Date.now()
+    this.ObjectID = new ObjectID();
+    this.nestedInstances ={};
   }
 }

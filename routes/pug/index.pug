@@ -1,8 +1,8 @@
-html
+doctype html
+html(lang="en")
   head
     title ToDo Application
     meta(name='description', content='Home page')
-    link#favicon(rel='icon', href='https://hyperdev.com/favicon-app.ico', type='image/x-icon')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
@@ -21,14 +21,19 @@ html
           input(type="password" name="password")
         div.login-button
           input(type='submit', value='Log In')
-
     div.register
       form(action="/register" method="POST")
-        div.username
-          label.userLabel Username:  
-          input(type="text" name="username")
+        div.firstName
+          label.emailLabell email:  
+          input(type="text" name="email")
+        div.firstName
+          label.userLabel First Name:  
+          input(type="text" name="firstName")
+        div.lastName
+          label.userLabel Last Name:  
+          input(type="text" name="lastName")
         div.password
           label.passLabel Password:    
           input(type="password" name="password")
         div.login-button
-          input(type='submit', value='Register')
+          input(type='submit', value='Log In')

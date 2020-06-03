@@ -2,10 +2,38 @@ html
   head
     title Profile
     meta(name='description', content='Home page')
-    link#favicon(rel='icon', href='https://hyperdev.com/favicon-app.ico', type='image/x-icon')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='/style.css')
+    link(rel='stylesheet', href='/style/style.css')
+
+  
   body
-  h1.hello Hello #{user}
+  h1.hello Hello #{user.first}!
+
+  form(name="new-task" id="new-task")
+    p.status
+    div.title
+      label.inputLabel Task Title
+      input.titleInput(type="text" name="title" id="title")
+    div.description 
+      label.inputLabel Task Description
+      input.titleInput(type="text" name="description"  id="description")
+    div.dateTime
+      label.inputLabel Task Deadline
+      input.titleInput(type="datetime-local" name="dateTime" id="dateTime")
+    input(type="submit" id="submitTask")
+    div.tags 
+      label.tagsInput Choose your tags
+      each val in tags
+        -let tag = val.name
+        label(class="tag") #{val.name}
+        input(name=tag data-tagname=tag id=tag type="checkbox" )  
+    
+          
+script(src="/js/global.js")
+script(src="/js/profile.js")
+
+
+
+  
