@@ -7,12 +7,12 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/style/style.css')
 
-  
   body
   h1.hello Hello #{user.first}!
-  
+  a(href="/" id="logout") Logout
+
   form(name="new-task" id="new-task")
-    p.status
+    p.new-task-status
     div.title
       label.inputLabel Task Title
       input.titleInput(type="text" name="title" id="title")
@@ -23,21 +23,24 @@ html
       label.inputLabel Task Deadline
       input.titleInput(type="datetime-local" name="dateTime" id="dateTime")
     input(type="submit" id="submitTask")
-    div.tags 
+  form(name="new-tag" id="new-tag")
+    form.newTag 
+      p.new-tag-status
       label#addCustomTagsLabel
       input#addCustomTagsName(type="text")
       input#addCustomTagsColor(type="color")
-      div#displayTags
-        p#tagsInput Choose your tags
-        each val in tags
-          -let tag = val.name
-          -let tagId = `#${tag}`
-          -let tagColor = val.color
-          -let tagColorStyle = `background-color:${tagColor}`
-          //- label(class="tag" for=tagId)  #{tag}
-          div.tagInner(name=tag data-tagname=tag data-isTrue="false" id=tag type="checkbox" )
-            span.tagColor(style=tagColorStyle)
-            p #{tag}
+  div.tags
+    div#displayTags
+      p#tagsInput Choose your tags
+      each val in tags
+        -let tag = val.name
+        -let tagId = `#${tag}`
+        -let tagColor = val.color
+        -let tagColorStyle = `background-color:${tagColor}`
+        //- label(class="tag" for=tagId)  #{tag}
+        div.tagInner(name=tag data-tagname=tag data-isTrue="false" id=tag type="checkbox" )
+          span.tagColor(style=tagColorStyle)
+          p #{tag}
     
           
 script(src="/js/global.cs.js")

@@ -1,8 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto&display=swap');
+
+$primaryLight: #ac81ff;
+$primaryDark: #4a0072;
+$primary:  #7b1fa2;
+
+$secondary: #311b92;
+$secondaryLight: #6746c3;
+$secondaryBlue: #000063;
+
+$tert: #5271ff;
+$tertDark: darken($tert, 10%);
+$tertLight: lighten($tert, 5%); ;
+
+
+
+
+p {
+  font-family: "Open Sans", "Roboto", "Arial";
+  color: #333;
+  margin: 0px;
+}
+
+label, h1,h2,h3,h4,h5,h5{
+  margin: 0px;
+  font-family: "Roboto", "Open Sans", "Arial";
+  color: #333;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+}
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+
+#login-page {
+  min-height: 100vh;
+  background: linear-gradient(-180deg, $primaryDark 100%, $primary 100%) no-repeat;
+  padding: 0;
+  margin: 0;
+
+  .container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+
+    .container-inner {
+      width: fit-content;
+      margin: auto;
+
+      .branding {
+        width: 200px;
+        margin: auto;
+        display: block;
+      }
+
+
+    }
+
+    .login {
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      background: white;
+      padding: 5vh 5vw;
+      border-radius: 5px;
+
+      input {
+        width: 100%;
+        height: 25px;
+      }
+
+      .register > form > div > input { 
+        display: none;
+        z-index: 1;
+      }
+
+      .register {
+        margin: 0px;
+      }
+
+      h1 {
+        font-family: "Open Sans", "Roboto", "Arial";
+        font-size: 25px;
+        z-index: 2;
+      }
+
+      * {
+        margin: 5px 0px;
+        color: purple;
+        font-weight: 100;
+        width: 100%;
+      }
+
+      .signup.homepage-button {
+        transition:1s;
+         background: $primary
+       }
+
+      .homepage-button {
+        width: 100%;
+        height: 35px;
+        border-radius: 5px;
+        box-shadow: none;
+        border: none;
+        font-size: 15px;
+        letter-spacing: 1.2px;
+        color: white;
+        background: $tert
+      }
+
+     .homepage-button:hover {
+       transition:1s;
+        background: lighten($tertLight,7%);
+      }
+
+      .homepage-button:focus {
+        outline: none;
+      }
+
+
+    }
+
+    .homepage-button {
+      // background: blue;
+      // width: 100%;
+      // margin: 10px;
+    }  
+
+  }
+}
+
+
+
+
+
 .tagColor {
    height: 10px;
    width: 10px;
    display: inline-block;
    background: red;
+   border-radius: 500px;
    // highlight: none;
  }
  
@@ -10,6 +154,7 @@
     display: flex;
     padding: 0px;
    cursor: pointer;
+   width: fit-content;
     p {
       margin: 0px;
       font-size: 14pt;
@@ -27,9 +172,59 @@
  }
 
  .tagInner[data-istrue~="false"] > * {
-   opacity: 0.5;
+   opacity: 0.55;
  }
 
  .tagInner[data-istrue~="true"] > * {
    opacity: 1;
  }
+
+ .success {
+   color: #08b90e !important; 
+ }
+
+ .failed {
+  color: #EB5757 !important; 
+}
+
+.inputVisible {
+  margin: 5px;
+  z-index: 1;
+  position: relative;
+  display: inline-block !important;
+  transition: 1s;
+  // animation: displayLoginInput 0.25s !important
+}
+
+@keyframes displayLoginInput {
+  
+  0% {
+    display: inline-block;
+    top: -50px
+  }
+
+  25% {
+    display: inline-block;
+    top: -30px
+
+
+  }
+
+  50% {
+    display: inline-block;
+    top: -20px
+  }
+
+  75% {
+    display: inline-block;
+    top: -10px
+  }
+
+  
+  100% {
+    display: inline-block;
+    top: 0px
+  }
+
+
+} 

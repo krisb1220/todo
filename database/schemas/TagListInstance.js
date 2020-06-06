@@ -1,7 +1,6 @@
 module.exports.data = class TagListInstance {
   
   constructor(){
-    
     this.tags = {
         goal: {
           color: "#2F80ED",
@@ -16,17 +15,6 @@ module.exports.data = class TagListInstance {
           name: "Issue"
         }
     }
-  }
-
-  addNewTag(name, color) {
-    this.tags[name] = {
-      name: name, 
-      color: color
-    }
-  }
-
-  removeTag(tag) {
-    delete this.tags[name];
   }
 
 }

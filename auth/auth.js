@@ -17,10 +17,10 @@ module.exports = function(app, db) {
   });
 
 
-  passport.use(new LocalStrategy((email, password, done)=>{
-        db.collection("users").findOne({"email":email}, (err, doc)=>{
+  passport.use(new LocalStrategy((username, password, done)=>{
+        db.collection("users").findOne({"email":username}, (err, doc)=>{
           if(!doc) return done(null, false)
-          if(!email) return done(null, false);
+          if(!username) return done(null, false);
           if(!password) return done(null, false)
           else {
             if (!bcrypt.compareSync(password, doc.password)) return done(null, false); //if password hashes not equal, return NO ERRORS and AUTH FALSE

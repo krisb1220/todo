@@ -1,6 +1,20 @@
-let qry = function(query) {
-  return document.querySelector(query)
+let Globals = function(){
+    //query selector
+  this.qry = function(query) {
+    return document.querySelector(query)
+  }
+
+  //posts to the updateUser endpoint
+  this.postToUpdateUser = function(data, action) {
+    return axios({
+      method: 'post',
+      url: `/updateUser?action=${action}`,
+      data: data,
+      redirect: "manual"
+      })
+  }
 }
+
 
 /*==========================AXIOS============================*/
 

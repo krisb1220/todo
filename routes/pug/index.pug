@@ -6,34 +6,35 @@ html(lang="en")
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='/style.css')
-  body
-    h1.border.center Plan your goals!
-    h2.center Why not start now?
+    link(rel='stylesheet', href='/style/style.css')
+  body(id="login-page")
 
-    div.login
-      form(action="/login" method="POST")
-        div.username
-          label.userLabel Username:  
-          input(type="text" name="username")
-        div.password
-          label.passLabel Password:    
-          input(type="password" name="password")
-        div.login-button
-          input(type='submit', value='Log In')
-    div.register
-      form(action="/register" method="POST")
-        div.firstName
-          label.emailLabell email:  
-          input(type="text" name="email")
-        div.firstName
-          label.userLabel First Name:  
-          input(type="text" name="firstName")
-        div.lastName
-          label.userLabel Last Name:  
-          input(type="text" name="lastName")
-        div.password
-          label.passLabel Password:    
-          input(type="password" name="password")
-        div.login-button
-          input(type='submit', value='Log In')
+    .container
+      .container-inner
+        div.login
+          img(src="img/branding/7.png" class="branding")
+          h1.border.center#login-text Log in to your Tewdu account
+          p.status.failed
+          form(action="/login" method="POST")
+            div.username
+              input(type="text" name="username" placeholder="Email")
+            div.password
+              input(type="password" name="password" placeholder="Password")
+          span.login-button-container
+            button.homepage-button(value='Log In' id="login-button") Log In
+          
+          div.register
+            form(action="/register" method="POST" class="register-form")
+              div.firstName
+                input(type="email" name="email" placeholder="Email")
+              div.firstName
+                input(type="text" name="firstName" placeholder="First Name")
+              div.lastName
+                input(type="text" name="lastName" placeholder="Last Name")
+              div.password
+                input(type="password" name="password" placeholder="Password")
+              div.login-button
+          button.homepage-button(value='Log In' id="signup-button") Signup
+
+script(src="/js/global.cs.js")
+script(src="/js/home.cs.js")
