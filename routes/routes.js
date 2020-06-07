@@ -25,10 +25,6 @@ let makeNewUser = function (db, req, res, pw, email, first, last) {
   })
 }
 
-
-
-
-
 let ensureAuthenticated = function (req, res, next) {
   if (req.isAuthenticated()) {
     next()
@@ -37,82 +33,78 @@ let ensureAuthenticated = function (req, res, next) {
   }
 }
 
-
-
-
-module.exports = async function (app, db) {
-
-  let updateUserInner = async function (email, nestedObjectsArray, data) {
-    let doc = await UserModel.findOneAndUpdate({ "email": email }, {
-      $set: {
-        [nestedObjectsArray.join(".")]: data
-      }
-    }, { upsert: true, useFindAndModify: false })
-  }
-
-  let doesntExist = async function(email, array, cbTrue, cbFalse) {
-    let result = await UserModel.findOne({ "email": email }, async (err, doc)=>{
-      let query = array.join(".");
-      if(doc.query == undefined) {
-        cbTrue();
-      } else {
-        if(!cbFalse) return undefined;
-        if(cbFalse) cbFalse(); 
-      }
-  });
-
-  return result;
-}
-
-  let doRegistrationFormValidation = function(req, res){
-      let result = true;
-
-      if(req.body.email == '') {
-        res.json({error: "No email supplied"})
-        result = false;
-      }
-
-      else if(req.body.firstName == '') {
-        res.json({error: "No first name supplied"})
-        result = false;
-      }
-
-      else if(req.body.lastName == '') {
-        res.json({error: "No last name supplied"})
-        result = false;
-      }
-
-      else if(req.body.password == '') {
-        res.json({error: "No password supplied"})
-        result = false;
-      }
-
-      return result
-  }
-
-
-  let addNewTask = function(req, res){
-    if (req.body.title == ' ') res.json({ error: "No title provided" });
-    if (req.body.description == '') res.json({ error: "No description provided" });
-    if (req.body.date == '') res.json({ error: "No date provided" })
-    else {
-      res.json({ error: "Success!" });
-      updateUserInner(req.user.email, ["data", "tasks", `${ToDo.ObjectID}`], new Schemas.ToDoInstance(req.body));
+let updateUserInner = async function (email, nestedObjectsArray, data) {
+  let doc = await UserModel.findOneAndUpdate({ "email": email }, {
+    $set: {
+      [nestedObjectsArray.join(".")]: data
     }
+  }, { upsert: true, useFindAndModify: false })
 }
 
-  let addNewTag = function(req, res){
-    console.log(req.body)
-    let tagObject = req.body; 
-    if (tagObject.color == '#000000') tagObject.color = getRandomColor();
-    if (tagObject.name == '') res.json({error: "No tag provided"});
-    if (req.user.data.tags.tags[tagObject.name.toLocaleLowerCase()] != undefined ) res.json({error: "Tag already exists"});
-    else {
-      updateUserInner(req.user.email, ["data", "tags", "tags", `${tagObject.name.toLocaleLowerCase()}`], tagObject)
-      res.json({error: "Success!"})
-    } 
-  } 
+let doesntExist = async function(email, array, cbTrue, cbFalse) {
+  let result = await UserModel.findOne({ "email": email }, async (err, doc)=>{
+    let query = array.join(".");
+    if(doc.query == undefined) {
+      cbTrue();
+    } else {
+      if(!cbFalse) return undefined;
+      if(cbFalse) cbFalse(); 
+    }
+});
 
+return result;
+}
+
+let doRegistrationFormValidation = function(req, res){
+    let result = true;
+
+    if(req.body.email == '') {
+      res.json({error: "No email supplied"})
+      result = false;
+    }
+
+    else if(req.body.firstName == '') {
+      res.json({error: "No first name supplied"})
+      result = false;
+    }
+
+    else if(req.body.lastName == '') {
+      res.json({error: "No last name supplied"})
+      result = false;
+    }
+
+    else if(req.body.password == '') {
+      res.json({error: "No password supplied"})
+      result = false;
+    }
+
+    return result
+}
+
+
+let addNewTask = function(req, res){
+  if (req.body.title == ' ') res.json({ error: "No title provided" });
+  if (req.body.description == '') res.json({ error: "No description provided" });
+  if (req.body.date == '') res.json({ error: "No date provided" })
+  else {
+    res.json({ error: "Success!" });
+    updateUserInner(req.user.email, ["data", "tasks", `${ToDo.ObjectID}`], new Schemas.ToDoInstance(req.body));
+  }
+}
+
+let addNewTag = function(req, res){
+  console.log(req.body)
+  let tagObject = req.body; 
+  if (tagObject.color == '#000000') tagObject.color = getRandomColor();
+  if (tagObject.name == '') res.json({error: "No tag provided"});
+  if (req.user.data.tags.tags[tagObject.name.toLocaleLowerCase()] != undefined ) res.json({error: "Tag already exists"});
+  else {
+    updateUserInner(req.user.email, ["data", "tags", "tags", `${tagObject.name.toLocaleLowerCase()}`], tagObject)
+    res.json({error: "Success!"})
+  } 
+} 
+
+module.exports = function (app, db) {
 
   app.route("/").get((req, res) => {
     res.render(process.cwd() + "/routes/pug/index");
@@ -140,11 +132,6 @@ module.exports = async function (app, db) {
     }
   });
 
-  UserModel.deleteMany({email:"kris@xyz.com"}, (err, doc)=>{
-    console.log(doc);
-    if(err) console.error(err)
-    else console.log("deleted");
-  })
 
   app.route("/getUserData").get(ensureAuthenticated, (req, res) => {
     res.json(req.user.data);
