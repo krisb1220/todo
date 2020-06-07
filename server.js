@@ -10,6 +10,7 @@ const auth = require('./auth/auth');
 const Schemas = ('./database/schemas/schemas');
 const mongooseOptions = {useUnifiedTopology:true, useNewUrlParser:true};
 const app = express();
+let server = require("http").createServer(app)
 
 dotenv.config();
 app.use(express.static(__dirname+'/public'));
@@ -38,6 +39,6 @@ mongoose.connect(process.env.DATABASE, mongooseOptions, (err, db)=>{
 });
 
 
-app.listen(process.env.PORT||3000,()=>{
+server.listen(80,()=>{
   console.log('App is listening on port ' + process.env.PORT);
 })

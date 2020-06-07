@@ -64,6 +64,32 @@ module.exports = async function (app, db) {
   return result;
 }
 
+  let doRegistrationFormValidation = function(req, res){
+      let result = true;
+
+      if(req.body.email == '') {
+        res.json({error: "No email supplied"})
+        result = false;
+      }
+
+      else if(req.body.firstName == '') {
+        res.json({error: "No first name supplied"})
+        result = false;
+      }
+
+      else if(req.body.lastName == '') {
+        res.json({error: "No last name supplied"})
+        result = false;
+      }
+
+      else if(req.body.password == '') {
+        res.json({error: "No password supplied"})
+        result = false;
+      }
+
+      return result
+  }
+
 
   let addNewTask = function(req, res){
     if (req.body.title == ' ') res.json({ error: "No title provided" });
@@ -73,8 +99,7 @@ module.exports = async function (app, db) {
       res.json({ error: "Success!" });
       updateUserInner(req.user.email, ["data", "tasks", `${ToDo.ObjectID}`], new Schemas.ToDoInstance(req.body));
     }
-    
-  }
+}
 
   let addNewTag = function(req, res){
     console.log(req.body)
@@ -93,9 +118,6 @@ module.exports = async function (app, db) {
     res.render(process.cwd() + "/routes/pug/index");
   })
 
-
-  app.use("/login", passport.authenticate('local'));
-
   app.route("/login").post(passport.authenticate('local', {failureRedirect:"/"}), (req, res) => {
     console.log("posted");
     if(req.isAuthenticated()) {
@@ -108,14 +130,21 @@ module.exports = async function (app, db) {
   });
 
   app.route("/register").post(async (req, res) => {
-
-    await db.collection('user').findOne({ email: req.body.email }, (err, doc) => {
-      if (!doc) makeNewUser(db, req, res, req.body.password, req.body.email, req.body.firstName, req.body.lastName);
-      else res.json("A user already exists with this email")
-    });
-
-
+      if (!doRegistrationFormValidation(req, res)) {
+        console.log("A registration error occured")
+      } else {
+      UserModel.findOne({email: req.body.email}, (err, doc) => {
+        if (!doc) makeNewUser(db, req, res, req.body.password, req.body.email, req.body.firstName, req.body.lastName);
+        else res.json({error: "A user already exists with this email"});
+      });
+    }
   });
+
+  UserModel.deleteMany({email:"kris@xyz.com"}, (err, doc)=>{
+    console.log(doc);
+    if(err) console.error(err)
+    else console.log("deleted");
+  })
 
   app.route("/getUserData").get(ensureAuthenticated, (req, res) => {
     res.json(req.user.data);

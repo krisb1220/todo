@@ -26,7 +26,7 @@ html(lang="en")
           div.register
             form(action="/register" method="POST" class="register-form")
               div.firstName
-                input(type="email" name="email" placeholder="Email")
+                input(type="text" name="email" placeholder="Email")
               div.firstName
                 input(type="text" name="firstName" placeholder="First Name")
               div.lastName
@@ -35,6 +35,11 @@ html(lang="en")
                 input(type="password" name="password" placeholder="Password")
               div.login-button
           button.homepage-button(value='Log In' id="signup-button") Signup
+          -let year = new Date().getFullYear()
+          p.energy-brands  Tewdu Planning Co. © #{year} All rights reserved. <br>⚡ An Energy Online Brands Company ⚡
+
+
+
 
 script(src="/js/global.cs.js")
 script(src="/js/home.cs.js")
