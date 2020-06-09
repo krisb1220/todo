@@ -9,6 +9,7 @@ const routes = require('./routes/routes');
 const auth = require('./auth/auth');
 const Schemas = ('./database/schemas/schemas');
 const mongooseOptions = {useUnifiedTopology:true, useNewUrlParser:true};
+const fs = require('fs');
 const app = express();
 let server = require("http").createServer(app)
 
@@ -26,6 +27,8 @@ app.use(session({
   resave:true
 }))
 
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -39,6 +42,6 @@ mongoose.connect(process.env.DATABASE, mongooseOptions, (err, db)=>{
 });
 
 
-server.listen(80,()=>{
+server.listen(process.env.PORT || 443 ,()=>{
   console.log('App is listening on port ' + process.env.PORT);
 })

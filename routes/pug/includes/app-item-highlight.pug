@@ -1,0 +1,32 @@
+.app-component-container.task-highlight
+  .app-component-inner
+    form(name="new-task" id="new-task")
+        p.new-task-status
+        div.title
+          label.inputLabel Task Title
+          input.titleInput(type="text" name="title" id="title")
+        div.description 
+          label.inputLabel Task Description
+          input.titleInput(type="text" name="description"  id="description")
+        div.dateTime
+          label.inputLabel Task Deadline
+          input.titleInput(type="datetime-local" name="dateTime" id="dateTime")
+        input(type="submit" id="submitTask")
+    form(name="new-tag" id="new-tag")
+      form.newTag 
+        p.new-tag-status
+        label#addCustomTagsLabel
+        input#addCustomTagsName(type="text")
+        input#addCustomTagsColor(type="color")
+    div.tags
+      div#displayTags
+        p#tagsInput Choose your tags
+        each val in tags
+          -let tag = val.name
+          -let tagId = `#${tag}`
+          -let tagColor = val.color
+          -let tagColorStyle = `background-color:${tagColor}`
+          //- label(class="tag" for=tagId)  #{tag}
+          div.tagInner(name=tag data-tagname=tag data-isTrue="false" id=tag type="checkbox" )
+            span.tagColor(style=tagColorStyle)
+            p #{tag}

@@ -25,12 +25,24 @@ let makeNewUser = function (db, req, res, pw, email, first, last) {
   })
 }
 
-let ensureAuthenticated = function (req, res, next) {
-  if (req.isAuthenticated()) {
-    next()
-  } else {
-    res.redirect("/")
+let ensureAuthenticated = function (redirect) {
+    return (req, res, next)=>{
+      if (req.isAuthenticated()) {
+        next()
+    } else {
+      res.redirect(redirect)
+    }
   }
+}
+
+let ensureIsntAuthenticated = function (redirect) {
+  return (req, res, next)=>{
+    if (!req.isAuthenticated()) {
+      next()
+    } else {
+      res.redirect(redirect)
+   }
+}
 }
 
 let updateUserInner = async function (email, nestedObjectsArray, data) {
@@ -104,22 +116,26 @@ let addNewTag = function(req, res){
   } 
 } 
 
+/*==========================================================================
+                                                                      # ROUTES #
+===========================================================================*/
+
 module.exports = function (app, db) {
 
-  app.route("/").get((req, res) => {
+  app.route("/").get(ensureIsntAuthenticated("/profile"), (req, res) => {
     res.render(process.cwd() + "/routes/pug/index");
   })
 
-  app.route("/login").post(passport.authenticate('local', {failureRedirect:"/"}), (req, res) => {
-    console.log("posted");
-    if(req.isAuthenticated()) {
-      res.json({ error: "Success!" })
-    }
-    else if(!req.isAuthenticated()) {
-      res.status = 200;
-      res.json({error: "Wrong username or password"})
-    }
-  });
+  app.route("/login").post(passport.authenticate('local', {successRedirect:"/profile"}))
+
+    // if(req.isAuthenticated()) {
+    //   res.json({ error: "Success!" })
+    // }
+    // else if(!req.isAuthenticated()) {
+    //   res.json({error: "Wrong username or password"})
+    // }
+  // }
+  // );
 
   app.route("/register").post(async (req, res) => {
       if (!doRegistrationFormValidation(req, res)) {
@@ -133,11 +149,13 @@ module.exports = function (app, db) {
   });
 
 
+
+
   app.route("/getUserData").get(ensureAuthenticated, (req, res) => {
     res.json(req.user.data);
   })
 
-  app.route("/profile").get(ensureAuthenticated, (req, res) => {
+  app.route("/profile").get(ensureAuthenticated("/"), (req, res) => {
     res.render(process.cwd() + "/routes/pug/profile", { user: req.user, tags: req.user.data.tags.tags });
   });
 
@@ -151,7 +169,7 @@ module.exports = function (app, db) {
   })
 
 
-  app.route("/logout").post((req, res)=>{
+  app.route("/logout").get((req, res)=>{
     req.logout();
     res.redirect("/")
   })

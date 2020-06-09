@@ -1,0 +1,33 @@
+.scaleDownUpAnimation {
+  animation: scaleDownUpAnimation 0.7s linear; }
+
+.upOffScreenAnimation {
+  animation: upOffScreenAnimation 0.7s;
+  animation-fill-mode: forwards; }
+
+.slotMachineUpAnimation {
+  animation: slotMachineUpAnimation 0.7s;
+  animation-fill-mode: forwards; }
+
+@keyframes scaleDownUpAnimation {
+  50% {
+    opacity: 0;
+    transform: scale(0); }
+  100% {
+    transform: scale(1); } }
+@keyframes upOffScreenAnimation {
+  10% {
+    transform: translateY(10vh); }
+  100% {
+    transform: translateY(-120vh); } }
+@keyframes slotMachineUpAnimation {
+  50% {
+    transform: translateY(-100vh); }
+  51% {
+    opacity: 0;
+    transform: translateY(100vh); }
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
+
+/*# sourceMappingURL=animations.css.map */

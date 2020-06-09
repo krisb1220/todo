@@ -143,11 +143,3 @@ document.querySelector('#addCustomTagsName').addEventListener('keydown',(event)=
     });
   }
 })
-
-document.querySelector('#logout').addEventListener('click',(event)=>{
-  axios({
-  method: 'post',
-    url: `/logout`,
-    redirect: '/'
-  })
-})

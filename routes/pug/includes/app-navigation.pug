@@ -1,0 +1,17 @@
+
+.app-component-container.navigation
+  .app-component-inner
+    .navigation-left
+    .navigation-right
+      .greeting
+        h1 Hello, #{user.first}!
+      .menu 
+        -let menuItems = ["My Agenda", "My Calendar", "My Tasks", "My Issues", "My Goals", "My Tags"]
+        ul.navList 
+          each item in menuItems 
+            -let href = `?view=${item.replace(/ /g, "")}`
+              li.navItem 
+                a.navItemLink(href=href) #{item}
+
+
+

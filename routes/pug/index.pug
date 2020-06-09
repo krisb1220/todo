@@ -1,18 +1,20 @@
 doctype html
-html(lang="en")
+html(lang="en" id="login")
   head
     title ToDo Application
     meta(name='description', content='Home page')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/style/animations.css')
     link(rel='stylesheet', href='/style/style.css')
   body(id="login-page")
 
     .container
       .container-inner
         div.login
-          img(src="img/branding/7.png" class="branding")
+          a(href="/")
+            img(src="img/branding/7.png" class="branding")
           h1.border.center#login-text Log in to your Tewdu account
           p.status.failed
           form(action="/login" method="POST")
@@ -35,8 +37,8 @@ html(lang="en")
                 input(type="password" name="password" placeholder="Password")
               div.login-button
           button.homepage-button(value='Log In' id="signup-button") Signup
-          -let year = new Date().getFullYear()
-          p.energy-brands  Tewdu Planning Co. © #{year} All rights reserved. <br>⚡ An Energy Online Brands Company ⚡
+      -let year = new Date().getFullYear()
+      p.energy-brands  Tewdu Planning Co. © #{year} All rights reserved. <br>⚡ An Energy Online Brands Company ⚡
 
 
 
