@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto&display=swap&family=Rubik&family=Ubuntu');
+
+
+$primary: #36a263;
+$primaryDark: darken($primary, 10%);
+$primaryLight: lighten($primary, 5%); 
+
+$secondary: #311b92;
+$secondaryLight: #6746c3;
+$secondaryBlue: #000063;
+
+$tert: #5271ff;
+$tertDark: darken($tert, 10%);
+$tertLight: lighten($tert, 5%); 
+
+$textPrimary: #333333;
+$textLight: lighten($textPrimary, 10%);
+
+$quad:  #ff784d;
+$quadLight:  lighten($quad, 10%);
+$quadDark: darken($quad, 10%);
+
+$offWhite: #F6F6F6;
+
+@mixin shadow($length:3px) { 
+  box-shadow: $length 0px 20px 6px rgba(#333, 0.2);
+}
+
+
+/*======================================
+                    # App Container / Misc #
+======================================*/
+
+.app-page-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.tagColor {
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+  border-radius: 500px;
+}
+
+.tagInner {
+  display: flex;
+  padding: 0px;
+  width: fit-content;
+  margin: 0px 10px;
+  p {
+    margin: 0px;
+    font-size: 14pt;
+    margin-left: 10px;
+  }
+
+  span {
+      margin: auto 0px;
+  }
+
+  ::selection {
+    background: rgba(0,0,0,0)
+}
+  
+}
+
+[data-isclickable~="true"] {
+  cursor: pointer !important;
+
+  ::selection {
+    background: rgba(0,0,0,0)
+}
+
+
+}
+
+/*======================================
+                    # App Components #
+======================================*/
+
+.app-component-container {
+  min-height: 100vh;
+}
+
+/*======================================
+                        # Navigation #
+======================================*/
+
+.app-component-container.navigation {
+  @include shadow(10px);
+  background: $primary;
+  width: 22%;
+  max-height: 100%;
+  
+  .app-component-inner {
+    display: flex;
+    height: 100vh;
+
+    .navigation-left {
+      padding: 30px 5px;
+      width: 15%;
+      max-height: 100vh;
+      background: darken($primaryDark, 10%)
+    }
+
+    .navigation-right {
+      padding: 30px 20px;
+
+      ul {
+        padding: 10px 0px;
+      }
+
+      ul > li {
+        margin: 20px 0px;
+      }
+
+    }
+
+    * {
+      color: white;
+      list-style: none;
+      text-decoration: none;
+      }
+    }
+}
+
+div.navigation-right > div.menu > ul > li:nth-child(1) > a > svg.nav-icon > *{
+  color: $quad;
+}
+
+
+/*======================================
+                        # Dashboard #
+======================================*/
+
+.app-component-container.dashboard {
+  width: 53%;
+  max-height: 100vh;
+  overflow-y: auto;
+
+  .app-component-inner {
+    margin: 39px 48px 0px 59px;
+
+
+    h1.dashboard-view {
+      padding: 10px 0px;
+      margin: 10px 0px;
+      color: $quad;
+      // border-bottom: 1.5px rgba(30, 39, 134, 0.4) solid;
+    }
+  }
+}
+
+.app-component-container.dashboard::-webkit-scrollbar {
+  width: 5px;
+  background: rgba(134, 115, 115, 0.36);
+}
+
+.app-component-container.dashboard::-webkit-scrollbar-thumb {
+  height: 1vh;
+  width: 30px;
+  background: $quad;
+  border-radius: 5px;
+}
+
+.task-meta > *:not(.task-title) {
+  margin: 10px 0px;
+}
+
+.tag-list > .tagInner  {
+
+  align-content: center;
+  align-items: center;
+
+  p{
+    font-size: 15px;
+  }
+
+  .tagColor {
+    height: 7px;
+    width: 7px;
+  }
+
+}
+
+.date-container {
+  margin: 3vh 0px;
+}
+
+.date-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px #0000005e solid;
+  padding-bottom: 7px;
+  align-items: flex-end;
+
+  p {
+    font-family: "Open Sans", "Rubik", "Arial";
+    font-size: 16px;
+  }
+
+  p.date-header-date {
+   color: $textLight;
+   height: fit-content;
+   font-size: 24px;
+   color: gray;
+  }
+
+  p.addNewTaskToDate {
+    color: white;
+    background: $quad;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+}
+
+
+
+.task-container {
+  padding: 10px 0;
+  border-bottom: 1px #53535353 solid;
+  display:flex
+}
+
+.checkmark.notdone { 
+  font-size: 24px; 
+  color: #2123267d; 
+  margin: 2px 10px;
+}
+
+.checkmark.done { 
+  font-size: 24px; 
+  color: $quad; 
+  margin: 2px 10px
+}
+
+
+
+.task-title {
+  font-family: "Ubuntu", "Open Sans", "Arial";
+  font-size: 18px;
+  font-weight: 200;
+  color: $textLight;
+}
+
+.task-description {
+  font-family: "Ubuntu", "Open Sans", "Arial";
+  font-size: 12px;
+  color: $textLight;
+}
+
+.task-time {
+  font-family: "Ubuntu", "Open Sans", "Arial";
+  font-size: 15px;
+  color: $quad;
+}
+
+
+
+/*======================================
+                    # App Task Highlight #
+======================================*/
+
+.app-component-container.task-highlight {
+  width: 25%;
+  background: $offWhite;
+  @include shadow;
+
+  .app-component-inner.bottom{
+    margin: 31px 20px 0px 20px;
+  
+    .tagInner[data-istrue~="false"] > * {
+      opacity: 0.55;
+    }
+  
+    .tagInner[data-istrue~="true"] > * {
+      opacity: 1;
+    }
+  }
+}
+
+
+.inputVisible {
+  margin: 5px;
+  z-index: 1;
+  transition: 1.25s;
+  opacity: 1 !important;
+  display: inline-block !important;
+  // animation: displayLoginInput 0.25s !important
+}
+
+
+.success {
+  color: #08b90e !important; 
+}
+
+.failed {
+ color: #EB5757 !important; 
+}
+

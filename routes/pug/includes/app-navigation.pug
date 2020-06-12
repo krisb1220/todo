@@ -2,16 +2,24 @@
 .app-component-container.navigation
   .app-component-inner
     .navigation-left
+      .navigation-left-top 
+        a.navLeftItemLink()   <span class="iconify nav-icon" data-class="nav-icon" data-inline="true" data-icon="bx:bxs-user-circle"></span> 
+      .navigation-left-bottom
+        a.navLeftItemLink()   <span class="iconify nav-icon" data-class="nav-icon" data-inline="true" data-icon="ion:cog" ></span> 
+        a.navLeftItemLink()   <span class="iconify nav-icon" data-class="nav-icon" data-inline="true" data-icon="si-glyph:sign-out" ></span> 
+
     .navigation-right
       .greeting
         h1 Hello, #{user.first}!
       .menu 
         -let menuItems = ["My Agenda", "My Calendar", "My Tasks", "My Issues", "My Goals", "My Tags"]
+        -let menuIcons = ["mdi:book-open-page-variant","bi:calendar-date" , "clarity:clipboard-line", "whh:issue", "mdi:bullseye-arrow", "entypo:price-tag" ]
         ul.navList 
-          each item in menuItems 
-            -let href = `?view=${item.replace(/ /g, "")}`
-              li.navItem 
-                a.navItemLink(href=href) #{item}
+          each item, index in menuItems 
+            -let icon = menuIcons[index];
+            -let href = `?view=${item.replace(/ /g, "")}`;
+              li.navItem(style="display:flex;align-items:center") 
+                a.navItemLink(href=href)   <span class="iconify nav-icon" data-class="nav-icon" data-inline="true" data-icon=#{icon} style="font-size: 24px; margin: 0px 10px 0px 0px"></span> #{item} 
 
 
 

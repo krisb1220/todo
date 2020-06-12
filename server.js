@@ -42,6 +42,7 @@ mongoose.connect(process.env.DATABASE, mongooseOptions, (err, db)=>{
 });
 
 
-server.listen(process.env.PORT || 443 ,()=>{
+server.listen(80 || 443, ()=>{
+  console.log(server)
   console.log('App is listening on port ' + process.env.PORT);
 })

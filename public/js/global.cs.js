@@ -6,34 +6,68 @@
 
 let Globals = function(){
   //query selector
-this.qry = function(query) {
-  return document.querySelector(query)
-}
-
-//posts to the updateUser endpoint
-this.postToUpdateUser = function(data, action) {
-  return axios({
-    method: 'post',
-    url: `/updateUser?action=${action}`,
-    data: data,
-    redirect: "manual"
-    })
-}
-
-this.testAnimation = function(element, cls, timeInMs){
-  this.qry(element).classList.add(cls);
-  if(timeInMs) setTimeout(()=>{
-    this.qry(element).classList.remove(cls);
-  }, timeInMs)
-}
-
-
-this.post = function(postUrl, dataToPost, redirectOption){
-  return axios({
-          method: 'post',
-          url: postUrl,
-          data: dataToPost,
-          redirect: redirectOption
-        })
+  this.qry = function(query) {
+    return document.querySelector(query)
   }
+
+  //posts to the updateUser endpoint
+  this.postToUpdateUser = function(data, action) {
+    return axios({
+      method: 'post',
+      url: `/updateUser?action=${action}`,
+      data: data,
+      redirect: "manual"
+      })
+  }
+
+  this.testAnimation = function(element, cls, timeInMs){
+    this.qry(element).classList.add(cls);
+    if(timeInMs) setTimeout(()=>{
+      this.qry(element).classList.remove(cls);
+    }, timeInMs)
+  }
+
+
+  this.post = function(postUrl, dataToPost, redirectOption){
+    return axios({
+            method: 'post',
+            url: postUrl,
+            data: dataToPost,
+            redirect: redirectOption
+          })
+    }
+
+  this.getRandomColor =  ()=> {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+
+  
+  this.getLightBox = function(){
+    return axios({
+    "method": "get",
+    "url": "/includes/lightbox.html",
+    "method": "get"
+  }).then((res)=>{
+    console.log(res);
+    return res;
+  })
+  }
+
+  this.addLightBox = function(){
+    getLightBox().then((res)=>{
+      document.querySelector(".app-page-container").innerHTML += res.data;
+   });
+  }
+
+
+  this.removeLightBox = function(){
+    document.querySelector(".lightbox").remove()
+  }
+
 }

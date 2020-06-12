@@ -1,5 +1,5 @@
 .app-component-container.task-highlight
-  .app-component-inner
+  .app-component-inner.bottom
     form(name="new-task" id="new-task")
         p.new-task-status
         div.title
@@ -27,6 +27,6 @@
           -let tagColor = val.color
           -let tagColorStyle = `background-color:${tagColor}`
           //- label(class="tag" for=tagId)  #{tag}
-          div.tagInner(name=tag data-tagname=tag data-isTrue="false" id=tag type="checkbox" )
+          div.tagInner(name=tag data-tagname=tag data-isTrue="false" id=tag type="checkbox" data-isclickable="true")
             span.tagColor(style=tagColorStyle)
             p #{tag}

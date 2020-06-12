@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto&display=swap&family=Rubik&family=Ubuntu');
+
+$primary:  #673AB7;
+$primaryLight:  lighten($primary, 10%);
+$primaryDark: darken($primary, 10%);
+
+$secondary: #311b92;
+$secondaryLight: #6746c3;
+$secondaryBlue: #000063;
+
+$tert: #5271ff;
+$tertDark: darken($tert, 10%);
+$tertLight: lighten($tert, 5%); 
+
+$textPrimary: #333333;
+
+@mixin shadow($length:3px) { 
+  box-shadow: $length 0px 20px 6px rgba(#333, 0.2);
+}
+
+
+//IF THERE'S AN ISSUE LATER IT HAPPENED HERE
+#login.body {
+  margin: 0;
+}
+
+
+#login-page {
+  min-height: 100vh;
+  background: linear-gradient(-180deg, $primaryDark 100%, $primary 100%) no-repeat;
+  padding: 0;
+  margin: 0;
+
+  .container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+
+    .container-inner {
+      width: fit-content;
+      margin: auto;
+
+      .branding {
+        width: 200px;
+        margin: auto;
+        display: block;
+      }
+
+
+    }
+
+    .login {
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      background: white;
+      padding: 5vh 5vw;
+      border-radius: 5px;
+
+      input, input-webkit-autofill {
+        width: 100%;
+        height: 25px;
+        color: $textPrimary;
+      }
+
+      .register > form > div > input { 
+        display: none;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      .register {
+        margin: 0px;
+      }
+
+      h1 {
+        font-family: "Rubik", "Roboto", "Arial";
+        font-size: 25px;
+        z-index: 2;
+      }
+
+      * {
+        margin: 5px 0px;
+        color: $primary;
+        font-weight: 100;
+        width: 100%;
+      }
+
+
+      .homepage-button {
+        width: 100%;
+        height: 35px;
+        border-radius: 5px;
+        box-shadow: none;
+        border: none;
+        font-size: 15px;
+        letter-spacing: 1.2px;
+        color: white;
+      }
+
+      #login-button.homepage-button {
+        transition:1s;
+         background: $tertLight
+       }
+
+       #signup-button.homepage-button {
+        transition:1s;
+         background: $primary
+       }
+
+
+     #login-button.homepage-button:hover {
+       transition:1s;
+        background: lighten($tertLight,9%);
+      }
+
+      #signup-button.homepage-button:hover {
+        transition:1s;
+         background: lighten($primary,9%);
+       }
+
+      .homepage-button:focus {
+        outline: none;
+      }
+
+ 
+
+    input:focus, input:hover {
+      outline: none;
+      transition: 0s;
+      border: 1px solid $primary;
+      padding: 2px 3px
+
+  }
+
+    }
+
+    .energy-brands {
+      color: white;
+      text-align: center;
+      position: absolute;
+      bottom: 5px;
+      font-size: 10px;
+      margin: auto;
+      width: 100%;
+    }
+
+    .homepage-button {
+      // background: blue;
+      // width: 100%;
+      // margin: 10px;
+    }  
+
+  }
+}

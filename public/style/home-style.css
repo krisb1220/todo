@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto&display=swap&family=Rubik&family=Ubuntu");
+#login.body {
+  margin: 0; }
+
+#login-page {
+  min-height: 100vh;
+  background: linear-gradient(-180deg, #512e90 100%, #673AB7 100%) no-repeat;
+  padding: 0;
+  margin: 0; }
+  #login-page .container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex; }
+    #login-page .container .container-inner {
+      width: fit-content;
+      margin: auto; }
+      #login-page .container .container-inner .branding {
+        width: 200px;
+        margin: auto;
+        display: block; }
+    #login-page .container .login {
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      background: white;
+      padding: 5vh 5vw;
+      border-radius: 5px; }
+      #login-page .container .login input, #login-page .container .login input-webkit-autofill {
+        width: 100%;
+        height: 25px;
+        color: #333333; }
+      #login-page .container .login .register > form > div > input {
+        display: none;
+        opacity: 0;
+        z-index: 1; }
+      #login-page .container .login .register {
+        margin: 0px; }
+      #login-page .container .login h1 {
+        font-family: "Rubik", "Roboto", "Arial";
+        font-size: 25px;
+        z-index: 2; }
+      #login-page .container .login * {
+        margin: 5px 0px;
+        color: #673AB7;
+        font-weight: 100;
+        width: 100%; }
+      #login-page .container .login .homepage-button {
+        width: 100%;
+        height: 35px;
+        border-radius: 5px;
+        box-shadow: none;
+        border: none;
+        font-size: 15px;
+        letter-spacing: 1.2px;
+        color: white; }
+      #login-page .container .login #login-button.homepage-button {
+        transition: 1s;
+        background: #6c86ff; }
+      #login-page .container .login #signup-button.homepage-button {
+        transition: 1s;
+        background: #673AB7; }
+      #login-page .container .login #login-button.homepage-button:hover {
+        transition: 1s;
+        background: #99acff; }
+      #login-page .container .login #signup-button.homepage-button:hover {
+        transition: 1s;
+        background: #7f56c9; }
+      #login-page .container .login .homepage-button:focus {
+        outline: none; }
+      #login-page .container .login input:focus, #login-page .container .login input:hover {
+        outline: none;
+        transition: 0s;
+        border: 1px solid #673AB7;
+        padding: 2px 3px; }
+    #login-page .container .energy-brands {
+      color: white;
+      text-align: center;
+      position: absolute;
+      bottom: 5px;
+      font-size: 10px;
+      margin: auto;
+      width: 100%; }
+
+/*# sourceMappingURL=home-style.css.map */

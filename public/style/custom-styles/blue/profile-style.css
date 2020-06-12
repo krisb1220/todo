@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto&display=swap&family=Rubik&family=Ubuntu");
+/*======================================
+                    # App Container / Misc #
+======================================*/
+.app-page-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%; }
+
+.tagColor {
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+  border-radius: 500px; }
+
+.tagInner {
+  display: flex;
+  padding: 0px;
+  width: fit-content;
+  margin: 0px 10px; }
+  .tagInner p {
+    margin: 0px;
+    font-size: 14pt;
+    margin-left: 10px; }
+  .tagInner span {
+    margin: auto 0px; }
+  .tagInner ::selection {
+    background: rgba(0, 0, 0, 0); }
+
+[data-isclickable~="true"] {
+  cursor: pointer !important; }
+  [data-isclickable~="true"] ::selection {
+    background: rgba(0, 0, 0, 0); }
+
+/*======================================
+                    # App Components #
+======================================*/
+.app-component-container {
+  min-height: 100vh; }
+
+/*======================================
+                        # Navigation #
+======================================*/
+.app-component-container.navigation {
+  box-shadow: 10px 0px 20px 6px rgba(51, 51, 51, 0.2);
+  background: #1E2786;
+  width: 22%;
+  max-height: 100%; }
+  .app-component-container.navigation .app-component-inner {
+    display: flex;
+    height: 100vh; }
+    .app-component-container.navigation .app-component-inner .navigation-left {
+      padding: 30px 5px;
+      width: 15%;
+      max-height: 100vh;
+      background: #0b0f33; }
+    .app-component-container.navigation .app-component-inner .navigation-right {
+      padding: 30px 20px; }
+      .app-component-container.navigation .app-component-inner .navigation-right ul {
+        padding: 10px 0px; }
+      .app-component-container.navigation .app-component-inner .navigation-right ul > li {
+        margin: 20px 0px; }
+    .app-component-container.navigation .app-component-inner * {
+      color: white;
+      list-style: none;
+      text-decoration: none; }
+
+div.navigation-right > div.menu > ul > li:nth-child(1) > a > svg.nav-icon > * {
+  color: #6FCF97; }
+
+/*======================================
+                        # Dashboard #
+======================================*/
+.app-component-container.dashboard {
+  width: 53%;
+  max-height: 100vh;
+  overflow-y: auto; }
+  .app-component-container.dashboard .app-component-inner {
+    margin: 39px 48px 0px 59px; }
+    .app-component-container.dashboard .app-component-inner h1.dashboard-view {
+      padding: 10px 0px;
+      margin: 10px 0px;
+      color: #6FCF97; }
+
+.app-component-container.dashboard::-webkit-scrollbar {
+  width: 5px;
+  background: rgba(134, 115, 115, 0.36); }
+
+.app-component-container.dashboard::-webkit-scrollbar-thumb {
+  height: 1vh;
+  width: 30px;
+  background: #6FCF97;
+  border-radius: 5px; }
+
+.task-meta > *:not(.task-title) {
+  margin: 10px 0px; }
+
+.tag-list > .tagInner {
+  align-content: center;
+  align-items: center; }
+  .tag-list > .tagInner p {
+    font-size: 15px; }
+  .tag-list > .tagInner .tagColor {
+    height: 7px;
+    width: 7px; }
+
+.date-container {
+  margin: 3vh 0px; }
+
+.date-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px #0000005e solid;
+  padding-bottom: 7px;
+  align-items: flex-end; }
+  .date-header p {
+    font-family: "Open Sans", "Rubik", "Arial";
+    font-size: 16px; }
+  .date-header p.date-header-date {
+    color: #4d4d4d;
+    height: fit-content;
+    font-size: 24px;
+    color: gray; }
+  .date-header p.addNewTaskToDate {
+    color: white;
+    background: #6FCF97;
+    padding: 5px 10px;
+    border-radius: 5px; }
+
+.task-container {
+  padding: 10px 0;
+  border-bottom: 1px #53535353 solid;
+  display: flex; }
+
+.checkmark.notdone {
+  font-size: 24px;
+  color: #2123267d;
+  margin: 2px 10px; }
+
+.checkmark.done {
+  font-size: 24px;
+  color: #6FCF97;
+  margin: 2px 10px; }
+
+.task-title {
+  font-family: "Ubuntu", "Open Sans", "Arial";
+  font-size: 18px;
+  font-weight: 200;
+  color: #4d4d4d; }
+
+.task-description {
+  font-family: "Ubuntu", "Open Sans", "Arial";
+  font-size: 12px;
+  color: #4d4d4d; }
+
+.task-time {
+  font-family: "Ubuntu", "Open Sans", "Arial";
+  font-size: 15px;
+  color: #6FCF97; }
+
+/*======================================
+                    # App Task Highlight #
+======================================*/
+.app-component-container.task-highlight {
+  width: 25%;
+  background: #F6F6F6;
+  box-shadow: 3px 0px 20px 6px rgba(51, 51, 51, 0.2); }
+  .app-component-container.task-highlight .app-component-inner.bottom {
+    margin: 31px 20px 0px 20px; }
+    .app-component-container.task-highlight .app-component-inner.bottom .tagInner[data-istrue~="false"] > * {
+      opacity: 0.55; }
+    .app-component-container.task-highlight .app-component-inner.bottom .tagInner[data-istrue~="true"] > * {
+      opacity: 1; }
+
+.inputVisible {
+  margin: 5px;
+  z-index: 1;
+  transition: 1.25s;
+  opacity: 1 !important;
+  display: inline-block !important; }
+
+.success {
+  color: #08b90e !important; }
+
+.failed {
+  color: #EB5757 !important; }
+
+/*# sourceMappingURL=profile-style.css.map */

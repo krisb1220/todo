@@ -1,4 +1,11 @@
-let utils = new Globals();
+//Test
+
+const utils = new Globals();
+
+(function(){
+  document.getElementById("addCustomTagsColor").value = utils.getRandomColor();
+})();
+
 
   /*======================================
   # New Task Helpers #
@@ -100,8 +107,8 @@ var resetTagInput = function(res) {
     utils.qry("p.new-tag-status").classList.remove("failed")
     utils.qry("p.new-tag-status").classList.add("success")
     utils.qry("#displayTags").innerHTML += `
-    <div class="tagInner" name=${name} data-tagname=${name} data-isTrue="true" id=${name}>
-    <span class="tagColor" style="background:${color}">
+    <div class="tagInner" data-isclickable="true" name=${name} data-tagname=${name} data-isTrue="true" id=${name}>
+    <span class="tagColor" style="background:${color}"></span>
     <p>${name}</p>
     </div>
     `
@@ -143,3 +150,14 @@ document.querySelector('#addCustomTagsName').addEventListener('keydown',(event)=
     });
   }
 })
+
+let getLightBox = function(){
+  return axios({
+  "method": "get",
+  "url": "/includes/lightbox.html",
+  "method": "get"
+}).then((res)=>{
+  console.log(res);
+  return res;
+})
+}

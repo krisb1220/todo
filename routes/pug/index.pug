@@ -7,14 +7,14 @@ html(lang="en" id="login")
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/style/animations.css')
-    link(rel='stylesheet', href='/style/style.css')
+    link(rel='stylesheet', href='/style/home-style.css')
+    link(rel='stylesheet', href='/style/global.css')
   body(id="login-page")
-
     .container
       .container-inner
         div.login
           a(href="/")
-            img(src="img/branding/7.png" class="branding")
+            img(src="img/branding/tewdu-branding.png" class="branding")
           h1.border.center#login-text Log in to your Tewdu account
           p.status.failed
           form(action="/login" method="POST")

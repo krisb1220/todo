@@ -1,1 +1,33 @@
 .app-component-container.dashboard
+  .app-component-inner
+    h1.dashboard-view My Agenda
+    .dashboard-inner 
+      -let dates = user.data.tasks
+      each date in dates
+        .date-container(data-date=date.meta.date)
+          .date-header
+            p.date-header-date #{date.meta.date} 
+            p.addNewTaskToDate(data-clickedContext=date.meta.date data-isclickable="true" data-clicked=addNewTaskToDate) +Add New Task
+          each task in date 
+            if task != date.meta
+                div.task-container(data-id=task.ObjectID)
+                  if task.isCompleted === true
+                    div.iscompleted
+                      <span class="iconify checkmark done" data-clicked="markDone" data-isclickable="true" data-inline="false" data-icon="ion:checkmark-done-circle-sharp"></span>
+                  else 
+                    div.iscompleted
+                    <span class="iconify checkmark notdone" data-clicked="markDone" data-isclickable="true" data-inline="false" data-icon="ion:checkmark-done-circle-sharp"></span>
+                
+                  div.task-meta
+                    p.task-title #{task.title}
+                    p.task-description #{task.description}
+                    .task-meta-meta(style="display:flex")
+                      p.task-time #{task.time}
+                      p #{startDate}
+                      .tag-list(style="display:flex") 
+                        each tagObject in task.tags 
+                            -let tagColorStyle = `background:${tagObject.color}`
+                            -let tag = tagObject.name;
+                            div.tagInner(name=tag data-tagname=tag )
+                              span.tagColor(style=tagColorStyle)
+                              p #{tag}  

@@ -1,0 +1,41 @@
+p,a, li {
+  font-family: "Rubik", "Roboto", "Arial";
+  color: #333;
+  margin: 0px;
+}
+
+label, h1,h2,h3,h4,h5,h5, button{
+  margin: 0px;
+  font-family: "Rubik", "Open Sans", "Arial";
+  color: #333;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+}
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+.lightbox-inner {
+  position: fixed;
+  height: 90vh;
+  top: 5vh;
+  width: 50vw;
+  left: 25vw;
+  z-index: 100000000;
+  background: white;
+  border-radius: 50px;
+}
+
+.lightbox {
+  position: fixed;
+  height: 100vh; 
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 10000000;
+  background: rgba(51, 51, 51, 0.734);
+}

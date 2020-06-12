@@ -93,6 +93,17 @@ let doRegistrationFormValidation = function(req, res){
     return result
 }
 
+let buildTagsArray = function(req, res) {
+  let tagsArray = [];
+
+  req.body.tags.forEach((tagName)=>{
+    tagsArray.push(req.user.data.tags.tags[tagName.toLocaleLowerCase()]);
+  })
+
+  return tagsArray;
+
+}
+
 
 let addNewTask = function(req, res){
   if (req.body.title == ' ') res.json({ error: "No title provided" });
@@ -100,7 +111,13 @@ let addNewTask = function(req, res){
   if (req.body.date == '') res.json({ error: "No date provided" })
   else {
     res.json({ error: "Success!" });
-    updateUserInner(req.user.email, ["data", "tasks", `${ToDo.ObjectID}`], new Schemas.ToDoInstance(req.body));
+    req.body.tags = buildTagsArray(req, res);
+    console.log(req.body);
+    let ToDo =  new Schemas.ToDoInstance(req.body);
+    updateUserInner(req.user.email, ["data", "tasks", `${req.body.date}`, `${ToDo.ObjectID}`], ToDo);
+    updateUserInner(req.user.email, ["data", "tasks", `${req.body.date}`, `meta`], {
+      date: req.body.date
+    });
   }
 }
 
@@ -156,11 +173,13 @@ module.exports = function (app, db) {
   })
 
   app.route("/profile").get(ensureAuthenticated("/"), (req, res) => {
+    console.log(req.user.tasks)
     res.render(process.cwd() + "/routes/pug/profile", { user: req.user, tags: req.user.data.tags.tags });
   });
 
   app.route("/updateUser").post((req, res) => {
     if (req.query.action == "newtask") {
+      console.log("posted");
       addNewTask(req, res);
     }
     if(req.query.action == "newtag") {
